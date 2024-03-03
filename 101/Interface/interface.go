@@ -33,7 +33,7 @@ func interface1() {
 		Name: "Tom",
 		Sex:  true,
 	}
-	a = c //c属于a接口 a中没有具体属性 但是具有方法  实现接口的方法的类 就可以用接口调用方法
+	a = c //c属于a接口 a中没有具体属性 但是具有方法  实现接口的方法的类 就可以用赋值接口调用方法
 	a.Run()
 	a.Eat()
 	//简写
@@ -46,7 +46,44 @@ func interface1() {
 	b.Eat()
 }
 
-// interface帮助实现了反省
+// interface帮助实现了范型
+func myFunc(a interface{}) {
+	//入参为空接口，所有东西都实现了无方法 所以函数可以接受任何参数
+	fmt.Println(a)
+}
+
+func myFunc2(a animal) {
+	a.Run()
+	a.Eat()
+}
+
+var L animal
+
+func myfunc3() {
+	c := Cat{
+		Name: "Tom",
+		Sex:  false,
+	}
+	myInterface(c)
+	L.Run() //想使L具有RUN方法 L是个全局变量接口
+}
+
+func myInterface(a animal) {
+	L = a //传入一个animal接口的实例 传给L
+}
+
 func main() {
-	interface1()
+	//interface1()
+
+	myFunc("hhh")
+	a := 10
+	myFunc(a)
+	b := Cat{
+		Name: "Jerry",
+		Sex:  false,
+	}
+	myFunc(b)
+	myFunc2(b) //该函数只接受满足animal接口的类型
+
+	myfunc3()
 }
