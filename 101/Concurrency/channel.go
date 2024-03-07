@@ -64,7 +64,7 @@ func channelTest3() {
 	case <-c4:
 		fmt.Println("channel4")
 	default:
-		fmt.Println("No channel")
+		fmt.Println("No context")
 	}
 }
 func main() {
